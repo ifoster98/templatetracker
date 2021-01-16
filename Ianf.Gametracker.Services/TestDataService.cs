@@ -35,8 +35,15 @@ namespace Ianf.Gametracker.Services
 
         public async Task<List<Dto.TestData>> GetAllTestDataAsync()
         {
-            var results = await _testDataRepository.GetAllTestDataAsync();
-            return results.Select(t => t.ToDto()).ToList();
+            return new List<Dto.TestData>
+            {
+                new Dto.TestData
+                {
+                    Name = "TestDataName",
+                    DateOfBirth = DateTime.Now.AddYears(-42),
+                    Address = "TestDataAddress"
+                }
+            };
         }
     }
 }

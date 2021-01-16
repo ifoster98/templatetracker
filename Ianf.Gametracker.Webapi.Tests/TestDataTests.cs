@@ -1,3 +1,4 @@
+using System.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -36,6 +37,22 @@ namespace Ianf.Gametracker.Webapi.Tests
             result.EnsureSuccessStatusCode();
             var resultContent = await result.Content.ReadAsStringAsync();
             Assert.Equal("{\"value\":1}", resultContent);
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task TestGetAllTestDataAsync()
+        {
+            // Assemble
+            var url = $"{_baseUrl}/TestData"; 
+
+            // Act
+            var result = await _client.GetAsync(url);
+
+            // Assert
+            result.EnsureSuccessStatusCode();
+            var resultContent = await result.Content.ReadAsStringAsync();
+            var testData = JsonConvert.DeserializeObject<List<Gametracker.Services.Dto.TestData>>(resultContent);
+            Assert.Equal("TestDataName", testData[0].Name);
         }
     }
 }
