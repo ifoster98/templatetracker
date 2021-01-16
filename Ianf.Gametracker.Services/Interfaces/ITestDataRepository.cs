@@ -9,6 +9,6 @@ namespace Ianf.Gametracker.Services.Interfaces
     {
         Task<PositiveInt> SaveTestDataAsync(TestData workout);
 
-        Task<List<TestData>> GetAllTestData();
+        Task<List<TestData>> GetAllTestDataAsync();
     }
 }

@@ -28,19 +28,15 @@ namespace Ianf.Gametracker.Services
         protected async Task<Either<IEnumerable<DtoValidationError>, TestData>> ValidateTestDataToAdd(TestData testData)
         {
             var errors = new List<DtoValidationError>();
+            // Validation checks here.
             if (errors.Any()) return errors;
             return testData;
         }
 
         public async Task<List<Dto.TestData>> GetAllTestDataAsync()
         {
-            var testDatas = await _testDataRepository.GetServicesAfterDate(testDataDay);
-            return testDatas.Any()
-                ? Some(testDatas
-                    .OrderBy(w => w.TestDataTime)
-                    .First()
-                    .ToDto())
-                : None;
+            var results = await _testDataRepository.GetAllTestDataAsync();
+            return results.Select(t => t.ToDto()).ToList();
         }
     }
 }

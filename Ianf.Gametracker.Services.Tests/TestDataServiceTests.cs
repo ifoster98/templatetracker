@@ -2,22 +2,19 @@
 using System;
 using System.Collections.Generic;
 using Ianf.Gametracker.Services.Domain;
-using Ianf.Gametracker.Services.Persistance.Interfaces;
-using Ianf.Gametracker.Services.Services;
-using Ianf.Gametracker.Services.Services.Interfaces;
 using Moq;
 using Xunit;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Ianf.Gametracker.Services.Dto;
+using Ianf.Gametracker.Services;
+using Ianf.Gametracker.Services.Interfaces;
 
 namespace Ianf.Gametracker.UnitTest.Services
 {
     public class TestDataServiceTests
     {
         private readonly Mock<ITestDataRepository> _testDataRepository;
-        private readonly Mock<ILogger> _logger;
         private readonly ITestDataService _testDataService;
         private readonly string name = "TestName";
         private DateTime testDateOfBirth = DateTime.Now;
@@ -34,7 +31,6 @@ namespace Ianf.Gametracker.UnitTest.Services
         public TestDataServiceTests()
         {
             _testDataRepository = new Mock<ITestDataRepository>();
-            _logger = new Mock<ILogger>();
             _testDataService = new TestDataService(_testDataRepository.Object);
         }
 

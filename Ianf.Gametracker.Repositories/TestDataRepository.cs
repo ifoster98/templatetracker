@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using Ianf.Gametracker.Repositories.Interfaces;
 using Ianf.Gametracker.Services.Domain;
+using Ianf.Gametracker.Services.Interfaces;
 
 namespace Ianf.Gametracker.Repositories
 {
@@ -22,7 +22,7 @@ namespace Ianf.Gametracker.Repositories
             return PositiveInt.CreatePositiveInt(entity.Id).IfNone(new PositiveInt());
         }
 
-        public async Task<List<TestData>> GetAllTestData() =>
+        public async Task<List<TestData>> GetAllTestDataAsync() =>
             await _dbContext.TestDatas
                 .Select(s => s.ToDomain())
                 .ToListAsync();
